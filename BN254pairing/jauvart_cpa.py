@@ -8,13 +8,13 @@ from multiprocessing import Pool
 #correct_key = 0x15eb62e02fbc3981f9cfed3c30c7f70c99189bed20001f2ac2a9f68e62b8da62
 
 def set_parmeter():
-    alpha_bits = 8
-    mask = 0xffff
+    alpha_bits = 24
+    mask = 0xffffffff
     return [alpha_bits,mask]
 
 def cpa(alpha_key):
-    T_Start = 0
-    T_End = 5000
+    T_Start = 1480
+    T_End = 1530
     T_Period = 1
     key_range = 0x100
 
