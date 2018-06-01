@@ -8,8 +8,8 @@ from multiprocessing import Pool
 #correct_key = 0x15eb62e02fbc3981f9cfed3c30c7f70c99189bed20001f2ac2a9f68e62b8da62
 
 def set_parmeter():
-    alpha_bits = 24
-    mask = 0xffffffff
+    alpha_bits = 8
+    mask = 0xffff
     return [alpha_bits,mask]
 
 def cpa(alpha_key):
@@ -22,11 +22,11 @@ def cpa(alpha_key):
     alpha_bits = parmeter[0]
     mask = parmeter[1]
 
-    meta = os.listdir('data/wave_meta4')
-    meta_path = os.path.join(os.getcwd(),'data/wave_meta4')
-    files = os.listdir('data/wave4')
-    dir_path = os.path.join(os.getcwd(),'data/wave4')
-    out_dir = os.path.join(os.getcwd(),"out")
+    meta = os.listdir('wave_meta4')
+    meta_path = os.path.join(os.getcwd(),'wave_meta4')
+    files = os.listdir('wave')
+    dir_path = os.path.join(os.getcwd(),'wave')
+    out_dir = os.path.join(os.getcwd(),"jauvart_cpa_out")
 
     plain = []
     for file_name in meta:
@@ -52,7 +52,7 @@ def cpa(alpha_key):
         keys = np.zeros(key_range)
         for key in range(len(keys)):
             all_key = (key << alpha_bits) | alpha_key
-            keys[key] = (plain[i] * all_key) & mask
+            keys[key] = bin((plain[i] * all_key) & mask).count('1')
         hw.append(keys)
     hw = np.array(hw).T
 
@@ -91,12 +91,12 @@ if __name__ == '__main__':
     alpha_bits = set_parmeter()[0]
     alpha_in_file = "alpha" + str(alpha_bits) + ".txt"
 
-    out_dir = os.path.join(os.getcwd(),"out")
+    out_dir = os.path.join(os.getcwd(),"jauvart_cpa_out")
     if not os.path.isdir(out_dir):
         os.mkdir(out_dir)
         alpha_file_path = os.path.join(out_dir,alpha_in_file)
         with open(alpha_file_path,"w") as f:
-            f.write("0,0x0,0.0")
+            f.write("1,0x0,0.0")
 
     alpha_keys = []
     p = os.path.join(out_dir,alpha_in_file)
