@@ -2,12 +2,13 @@ def get_parameter(request):
     parameter = {}
 
     #experiment parameter
-    parameter["candidate_key_length"] = 0
+    parameter["candidate_key_length"] = 24
     parameter["poi_start"] = 0
-    parameter["poi_end"] = 10
+    parameter["poi_end"] = 5000
     parameter["key_range"] = 0x100
     parameter["estimation_key_length"] = 8
     parameter["alpha"] = 16
+    parameter["parallel"] = True
 
     #file parameter
     parameter["wave_dir_name"] = "wave"

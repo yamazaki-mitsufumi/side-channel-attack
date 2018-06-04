@@ -187,9 +187,13 @@ if __name__ == '__main__':
 
     candidate_key_list = get_candidate_key_list()
 
-    pool = Pool(cpu_count())
-    pool.map(cpa, candidate_key_list)
-    pool.close()
+    if(get_parameter["parallel"]):
+        pool = Pool(cpu_count())
+        pool.map(cpa, candidate_key_list)
+        pool.close()
+    else:
+        for candidate_key in candidate_key_list:
+            cpa(candidate_key)
 
     result = get_result(candidate_key_list)
     output_final_result(result)
