@@ -17,7 +17,7 @@ def vector_transformed_by(data):
     for i in range(target_word + 1):    #i = 0,1,...,target_word
         element = int(data) % modulo
         raw_vector.append(element)
-        data >> word_length
+        data = data >> word_length
     vector = np.array(raw_vector, dtype=np.int64)
     return vector
 
@@ -125,7 +125,7 @@ def output_max_correlation(candidate_key, correlation_list):
 def cpa(candidate_key):
     plain_matrix = get_plain_matrix()
     wave_matrix = get_wave_matrix()
-    candidate_key_vector = vector_transformed_by(candidate_key)
+    candidate_key_vector = vector_transformed_by(candidate_key)[::-1]
     hamming_weight_matrix = calculate_unterluggauer_hamming_weight_matrix(plain_matrix, candidate_key_vector)
     correlation_matrix = calculate_correlation_matrix(hamming_weight_matrix, wave_matrix)
     max_correlation_list = calculate_max_correlation_list(correlation_matrix)

@@ -2,9 +2,9 @@ def get_parameter(request):
     parameter = {}
 
     #experiment parameter
-    parameter["candidate_key_length"] = 24
-    parameter["poi_start"] = 0
-    parameter["poi_end"] = 5000
+    parameter["candidate_key_length"] = 0
+    parameter["poi_start"] = 1480
+    parameter["poi_end"] = 1530
     parameter["key_range"] = 0x100
     parameter["estimation_key_length"] = 8
     parameter["alpha"] = 16
